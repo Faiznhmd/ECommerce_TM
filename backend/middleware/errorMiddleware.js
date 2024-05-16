@@ -1,3 +1,5 @@
+import { config } from '../config/config.js';
+
 const notFound = (req, res, next) => {
   const error = new Error(`Not Found -${req.originalURL}`);
   res.status(404);
@@ -14,7 +16,7 @@ const errorHandler = (err, req, res, next) => {
   }
   res.status(statusCode).json({
     message,
-    stack: process.env.NODE_ENV === 'production' ? '*' : err.stack,
+    stack: config.env === 'production' ? '*' : err.stack,
   });
 };
 export { notFound, errorHandler };
