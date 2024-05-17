@@ -16,7 +16,7 @@ const importData = async () => {
     await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
-    console.log('hit ehr');
+
     const createUsers = await User.insertMany(users);
 
     const adminUser = createUsers[0].id;
