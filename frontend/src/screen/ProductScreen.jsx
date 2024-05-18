@@ -109,7 +109,7 @@ const ProductScreen = () => {
                     className="btn-block"
                     type="button"
                     disabled={product.countInStock === 0}
-                    onChange={addToCartHandle}
+                    onClick={addToCartHandle}
                   >
                     Add To Cart
                   </Button>
