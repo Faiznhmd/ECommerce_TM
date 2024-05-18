@@ -9,7 +9,7 @@ import Loader from '../component/Loader.jsx';
 const ProductScreen = () => {
   const { id: productId } = useParams();
   const { data, isLoading, error } = useGetProductDetailsQuery(productId);
-  const product = data.data;
+  const product = data?.data;
 
   return (
     <>
