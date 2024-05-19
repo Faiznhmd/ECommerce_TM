@@ -3,6 +3,7 @@ import cors from 'cors';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 import productsRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
 
 //routes
 app.use('/api/products', productsRoutes);
+app.use('/api/users', userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
