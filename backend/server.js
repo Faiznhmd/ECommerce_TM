@@ -4,12 +4,14 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 import productsRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
 //Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use(cors());
 
