@@ -2,6 +2,7 @@ import asyncHandler from '../middleware/expresshandler.js';
 import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
 
+//login
 const AuthUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -35,6 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password,
   });
+
   if (user) {
     generateToken(res, user._id);
 
@@ -49,11 +51,11 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('Invalid user data');
   }
 });
-
+//logout
 const logoutUser = asyncHandler(async (req, res) => {
   res.cookie('jwt', '', {
     httpOnly: true,
-    expiresIn: new Date(0),
+    expires: new Date(0),
   });
   res.status(200).json({ message: 'Logout Successfully' });
 });
