@@ -28,7 +28,7 @@ const CartScreen = () => {
   };
 
   const checkOutHandler = () => {
-    navigate('/login?redirect=/shipping');
+    navigate('/auth?redirect=/shipping');
   };
 
   const cart = useSelector((state) => state.cart);
