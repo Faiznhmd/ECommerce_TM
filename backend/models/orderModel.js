@@ -33,7 +33,7 @@ const orderSchema = new mongoose.Schema(
       update_times: { type: String },
       email_address: { type: String },
     },
-    items_price: {
+    itemsPrice: {
       type: Number,
       required: true,
       default: 0.0,
@@ -43,7 +43,7 @@ const orderSchema = new mongoose.Schema(
       required: true,
       default: 0.0,
     },
-    shipping_price: {
+    shippingPrice: {
       type: Number,
       required: true,
       default: 0.0,
