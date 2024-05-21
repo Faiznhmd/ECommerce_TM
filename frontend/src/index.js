@@ -21,6 +21,7 @@ import Register from './screen/Register.jsx';
 import Profile from './screen/Profile.jsx';
 import ShippingScreen from './screen/ShippingScreen.jsx';
 import PrivateRoutes from './component/PrivateRoutes.jsx';
+import Payment from './screen/Payment.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +37,7 @@ const router = createBrowserRouter(
 
       <Route path="" element={<PrivateRoutes />}>
         <Route path="/shipping" element={<ShippingScreen />} />
+        <Route path="/payment" element={<Payment />} />
       </Route>
     </Route>
   )
