@@ -5,11 +5,11 @@ import Order from '../models/orderModel.js';
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
     orderItems,
-    shippingAddress,
-    paymentMethod,
     itemsPrice,
-    taxPrice,
+    paymentMethod,
+    shippingAddress,
     shippingPrice,
+    taxPrice,
     totalPrice,
   } = req.body;
   if (orderItems && orderItems.length === 0) {
@@ -20,7 +20,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       orderItems: orderItems.map((x) => ({
         ...x,
         product: x._id,
-        _id: undefined,
+        _id: '11345',
       })),
       user: req.user._id,
       shippingAddress,

@@ -28,10 +28,10 @@ const PlaceOrderScreen = () => {
     try {
       const res = await createOrder({
         orderItems: cart.cartItems,
-        shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
         itemsPrice: cart.itemsPrice,
-        shippingPrice: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        shippingAddress: cart.shippingAddress,
+        shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
       }).unwrap();
@@ -45,18 +45,24 @@ const PlaceOrderScreen = () => {
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4 />
-
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                <strong>Address:</strong>
+                <strong>Address: </strong>
                 {cart.shippingAddress.address}, {cart.shippingAddress.city},
                 {cart.shippingAddress.postalCode},{cart.shippingAddress.country}
               </p>
             </ListGroup.Item>
+
+            <ListGroup.Item>
+              <h2>Payment Method</h2>
+              <strong>Method: </strong>
+              {cart.paymentMethod}
+            </ListGroup.Item>
+
             <ListGroup.Item>
               <h2>Order Items</h2>
               {cart.cartItems.length === 0 ? (
@@ -80,7 +86,8 @@ const PlaceOrderScreen = () => {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.price}=${item.qty * item.price}
+                          {item.qty} x ${item.price}=${' '}
+                          {(item.qty * (item.price * 100)) / 100}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -124,9 +131,11 @@ const PlaceOrderScreen = () => {
                 </Row>
               </ListGroup.Item>
 
-              <ListGroup.Item>
-                {error && <Message variant="danger">{error} </Message>}
-              </ListGroup.Item>
+              {error && (
+                <ListGroup.Item>
+                  <Message variant="danger">{error.data?.message} </Message>
+                </ListGroup.Item>
+              )}
               <ListGroup.Item>
                 <Button
                   type="button"
