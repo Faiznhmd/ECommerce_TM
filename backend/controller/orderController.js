@@ -1,4 +1,4 @@
-import asyncHandler from '../middleware/expresshandler.js';
+import asyncHandler from '../middleware/asyncHandlers.js';
 import Order from '../models/orderModel.js';
 
 //create new order
@@ -12,6 +12,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     taxPrice,
     totalPrice,
   } = req.body;
+
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error('No Order items');
@@ -20,7 +21,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       orderItems: orderItems.map((x) => ({
         ...x,
         product: x._id,
-        _id: '11345',
+        _id: undefined,
       })),
       user: req.user._id,
       shippingAddress,
@@ -59,7 +60,22 @@ const getOrderByID = asyncHandler(async (req, res) => {
 //update order to paid
 
 const updateOrderToPaid = asyncHandler(async (req, res) => {
-  res.send('Update order to paid');
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    order.paymentResult = {
+      id: req.params.id,
+      status: req.body.status,
+      update_times: req.body.update_times,
+      email_address: req.body.payer.email_address,
+    };
+    const updatedOrder = await order.save();
+    res.status(200).json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error('Order Not Found');
+  }
 });
 
 //update order to deleivered
