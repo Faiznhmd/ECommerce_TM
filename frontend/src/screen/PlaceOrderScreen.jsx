@@ -14,6 +14,8 @@ const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
+  console.log(cart.totalPrice);
+
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
   useEffect(() => {
@@ -52,8 +54,9 @@ const PlaceOrderScreen = () => {
               <h2>Shipping</h2>
               <p>
                 <strong>Address: </strong>
-                {cart.shippingAddress.address}, {cart.shippingAddress.city},
-                {cart.shippingAddress.postalCode},{cart.shippingAddress.country}
+                {cart.shippingAddress.address},{cart.shippingAddress.city},
+                {cart.shippingAddress.postalCode}
+                {cart.shippingAddress.country}
               </p>
             </ListGroup.Item>
 
@@ -86,7 +89,7 @@ const PlaceOrderScreen = () => {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.price}=${' '}
+                          {item.qty} x ${item.price}=$
                           {(item.qty * (item.price * 100)) / 100}
                         </Col>
                       </Row>
@@ -120,7 +123,7 @@ const PlaceOrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Tax:</Col>
-                  <Col>${cart.taxPrice}</Col>
+                  <Col>${cart.taxprice}</Col>
                 </Row>
               </ListGroup.Item>
 
