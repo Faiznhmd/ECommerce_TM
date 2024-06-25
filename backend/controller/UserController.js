@@ -1,4 +1,4 @@
-import asyncHandler from '../middleware/expresshandler.js';
+import asyncHandler from '../middleware/asyncHandlers.js';
 import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
 
