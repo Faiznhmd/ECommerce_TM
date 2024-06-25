@@ -79,7 +79,6 @@ const ProductScreen = () => {
                     <Col>Status:</Col>
                     <Col>
                       <strong>
-                        $
                         {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
                       </strong>
                     </Col>
