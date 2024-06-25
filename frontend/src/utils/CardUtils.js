@@ -14,11 +14,11 @@ export const updateCart = (state) => {
   state.taxprice = addDecimal(Number((0.15 * state.itemsPrice).toFixed(2)));
 
   //cal total price
-
-  state.totalPrice =
+  state.totalPrice = addDecimal(
     Number(state.itemsPrice) +
-    Number(state.shippingPrice) +
-    Number(state.taxprice).toFixed(2);
+      Number(state.shippingPrice) +
+      Number(state.taxprice)
+  );
   localStorage.setItem('cart', JSON.stringify(state));
   return state;
 };
