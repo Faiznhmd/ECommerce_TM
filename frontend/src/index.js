@@ -26,6 +26,8 @@ import PrivateRoutes from './component/PrivateRoutes.jsx';
 import Payment from './screen/Payment.jsx';
 import PlaceOrderScreen from './screen/PlaceOrderScreen.jsx';
 import OrderScreen from './screen/OrderScreen.jsx';
+import AdminRoutes from './component/AdminRoute.jsx';
+import OrderList from './screen/admin/OrderList.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -44,6 +46,10 @@ const router = createBrowserRouter(
         <Route path="/payment" element={<Payment />} />
         <Route path="/placeorder" element={<PlaceOrderScreen />} />
         <Route path="/order/:id" element={<OrderScreen />} />
+      </Route>
+
+      <Route path="" element={<AdminRoutes />}>
+        <Route path="/admin/orderlist" element={<OrderList />} />
       </Route>
     </Route>
   )
