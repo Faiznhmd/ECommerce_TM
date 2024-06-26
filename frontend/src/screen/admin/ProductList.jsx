@@ -1,15 +1,33 @@
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
-import { FaTimes, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import Message from '../../component/Message';
 import Loader from '../../component/Loader';
-import { useGetProductsQuery } from '../../slices/ProductAPIslice.js';
+import {
+  useGetProductsQuery,
+  useCreateProductMutation,
+} from '../../slices/ProductAPIslice.js';
+import { toast } from 'react-toastify';
 
 const ProductList = () => {
-  const { data: products, isLoading, error } = useGetProductsQuery();
+  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+
+  const [createProduct, { isLoading: loadingCreate }] =
+    useCreateProductMutation();
 
   const deletehandler = (id) => {
     console.log('delete', id);
+  };
+
+  const createProductHandler = async () => {
+    if (window.confirm('Are you sure you want to create a product?')) {
+      try {
+        await createProduct();
+        refetch();
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
   };
 
   return (
@@ -19,7 +37,7 @@ const ProductList = () => {
           <h1>Products</h1>
         </Col>
         <Col className="text-end">
-          <Button className="btn-sm m-3">
+          <Button className="btn-sm m-3" onClick={createProductHandler}>
             <FaEdit />
             Create Product
           </Button>
