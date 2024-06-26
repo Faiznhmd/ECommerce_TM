@@ -26,6 +26,8 @@ const OrderScreen = () => {
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
+  const { userInfo } = useSelector((state) => state.auth);
+
   const [deliverOrder, { isLoading: loadingDeliver }] =
     useDeliverOrderMutation();
 
@@ -34,8 +36,6 @@ const OrderScreen = () => {
     isLoading: loadingPaypal,
     error: errorPaypal,
   } = useGetPaypalClientIdQuery();
-
-  const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (!errorPaypal && !loadingPaypal && paypal.clientId) {
@@ -96,11 +96,11 @@ const OrderScreen = () => {
     }
   };
 
-  // async function onApproveTest() {
-  //   await payOrder({ orderId, details: { payer: {} } });
-  //   refetch();
-  //   toast.success('Payment successfull');
-  // }
+  async function onApproveTest() {
+    await payOrder({ orderId, details: { payer: {} } });
+    refetch();
+    toast.success('Payment successfull');
+  }
 
   return isLoading ? (
     <Loader />
@@ -201,12 +201,12 @@ const OrderScreen = () => {
                     <Loader />
                   ) : (
                     <div>
-                      {/* <Button
+                      <Button
                         style={{ marginBottom: '10px' }}
                         onClick={onApproveTest}
                       >
                         Test Pay Order
-                      </Button> */}
+                      </Button>
 
                       <div>
                         <PayPalButtons
