@@ -84,9 +84,10 @@ const updateOrderToDeleivered = asyncHandler(async (req, res) => {
   res.send('Update order to deleivered');
 });
 
-//get all orders
+//get all orders(admin)
 const getAllOrder = asyncHandler(async (req, res) => {
-  res.send('get order');
+  const orders = await Order.find({}).populate('user', 'id name');
+  res.status(200).json(orders);
 });
 
 export {
