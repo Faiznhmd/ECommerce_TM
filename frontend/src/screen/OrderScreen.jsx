@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
-import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
+import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Message from '../component/Message';
@@ -82,11 +82,11 @@ const OrderScreen = () => {
       });
   }
 
-  async function onApproveTest() {
-    await payOrder({ orderId, details: { payer: {} } });
-    refetch();
-    toast.success('Payment successfull');
-  }
+  // async function onApproveTest() {
+  //   await payOrder({ orderId, details: { payer: {} } });
+  //   refetch();
+  //   toast.success('Payment successfull');
+  // }
 
   return isLoading ? (
     <Loader />
@@ -182,16 +182,18 @@ const OrderScreen = () => {
               {!order.isPaid && (
                 <ListGroup.Item>
                   {loadingPay && <Loader />}
+
                   {isPending ? (
                     <Loader />
                   ) : (
                     <div>
                       {/* <Button
-                        onClick={onApproveTest}
                         style={{ marginBottom: '10px' }}
+                        onClick={onApproveTest}
                       >
                         Test Pay Order
                       </Button> */}
+
                       <div>
                         <PayPalButtons
                           createOrder={createOrder}
