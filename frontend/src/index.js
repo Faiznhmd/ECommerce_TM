@@ -28,6 +28,8 @@ import PlaceOrderScreen from './screen/PlaceOrderScreen.jsx';
 import OrderScreen from './screen/OrderScreen.jsx';
 import AdminRoutes from './component/AdminRoute.jsx';
 import OrderList from './screen/admin/OrderList.jsx';
+import ProductList from './screen/admin/ProductList.jsx';
+import UsersList from './screen/admin/UsersList.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -50,6 +52,8 @@ const router = createBrowserRouter(
 
       <Route path="" element={<AdminRoutes />}>
         <Route path="/admin/orderlist" element={<OrderList />} />
+        <Route path="/admin/productlist" element={<ProductList />} />
+        <Route path="/admin/userlist" element={<UsersList />} />
       </Route>
     </Route>
   )
