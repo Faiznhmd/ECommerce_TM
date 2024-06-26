@@ -23,7 +23,7 @@ const products = [
     countInStock: 75,
   },
   {
-    name: 'Product C',
+    name: 'Mouse',
     description:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     image: '/images/phone.jpg',
