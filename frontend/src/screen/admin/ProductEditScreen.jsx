@@ -8,6 +8,7 @@ import FormContainer from '../../component/FormContainer';
 import {
   useUpdateProductMutation,
   useGetProductDetailsQuery,
+  useUploadProductImageMutation,
 } from '../../slices/ProductAPIslice.js';
 
 const ProductEditScreen = () => {
@@ -31,6 +32,9 @@ const ProductEditScreen = () => {
 
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
+
+  const [uploadProductImage, { isLoading: loadingUpload }] =
+    useUploadProductImageMutation();
 
   const navigate = useNavigate();
 
@@ -62,6 +66,18 @@ const ProductEditScreen = () => {
       toast.success('Product Updated');
       refetch();
       navigate('/admin/productlist');
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
+  const uploadFileHandler = async (e) => {
+    const formdata = new FormData();
+    formdata.append('image', e.target.files[0]);
+    try {
+      const res = await uploadProductImage(formdata).unwrap();
+      toast.success(res.message);
+      setImage(res.image);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
@@ -102,6 +118,20 @@ const ProductEditScreen = () => {
               ></Form.Control>
             </Form.Group>
 
+            <Form.Group controlId="image" className="my-2">
+              <Form.Label>Image</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Image URL"
+                value={image}
+                onChange={(e) => setImage}
+              ></Form.Control>
+              <Form.Control
+                type="file"
+                label="Choose File"
+                onChange={uploadFileHandler}
+              ></Form.Control>
+            </Form.Group>
             <Form.Group controlId="brand" className="my-2">
               <Form.Label>Brand</Form.Label>
               <Form.Control
