@@ -6,31 +6,27 @@ import Loader from '../../component/Loader';
 import { toast } from 'react-toastify';
 import FormContainer from '../../component/FormContainer';
 import {
-  useGetUsersQuery,
+  useGetUserDetailsQuery,
   useUpdateUserMutation,
 } from '../../slices/userapislice.js';
 
 const UserEditScreen = () => {
   const { id: userId } = useParams();
-
   const [name, setName] = useState('');
-  const [email, setEmail] = useState(0);
-  const [isAdmin, setIsAdmin] = useState('');
+  const [email, setEmail] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const { data: user, isLoading, refetch, error } = useGetUsersQuery(userId);
+  const {
+    data: user,
+    isLoading,
+    refetch,
+    error,
+  } = useGetUserDetailsQuery(userId);
   console.log(user);
 
   const [updateUser, { isLoading: loadingUpdate }] = useUpdateUserMutation();
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) {
-      setName(user.name);
-      setEmail(user.email);
-      setIsAdmin(user.isAdmin);
-    }
-  }, [user]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -41,7 +37,7 @@ const UserEditScreen = () => {
         name,
         email,
         isAdmin,
-      }).unwrap();
+      });
       toast.success('User Updated');
       refetch();
       navigate('/admin/userlist');
@@ -49,7 +45,13 @@ const UserEditScreen = () => {
       toast.error(err?.data?.message || err.error);
     }
   };
-
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setEmail(user.email);
+      setIsAdmin(user.isAdmin);
+    }
+  }, [user]);
   return (
     <>
       <Link to="/admin/userlist" className="btn btn-light my-3">
@@ -94,7 +96,7 @@ const UserEditScreen = () => {
               ></Form.Check>
             </Form.Group>
 
-            <Button type="button" variant="primary" className="my-2">
+            <Button type="button" variant="primary">
               Update
             </Button>
           </Form>
