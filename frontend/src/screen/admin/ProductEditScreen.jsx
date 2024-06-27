@@ -39,16 +39,16 @@ const ProductEditScreen = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (product) {
-      setName(product.name);
-      setPrice(product.price);
-      setImage(product.image);
-      setBrand(product.brand);
-      setCategory(product.category);
-      setCountInStock(product.countInStock);
-      setDescription(product.description);
+    if (product.data) {
+      setName(product.data.name);
+      setPrice(product.data.price);
+      setImage(product.data.image);
+      setBrand(product.data.brand);
+      setCategory(product.data.category);
+      setCountInStock(product.data.countInStock);
+      setDescription(product.data.description);
     }
-  }, [product]);
+  }, [product.data]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
