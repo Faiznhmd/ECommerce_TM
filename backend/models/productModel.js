@@ -13,7 +13,7 @@ const reviewsSchema = new mongoose.Schema(
       type: Number,
       require: true,
     },
-    Comment: {
+    comment: {
       type: String,
       require: true,
     },
