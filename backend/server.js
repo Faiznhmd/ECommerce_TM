@@ -31,10 +31,10 @@ app.get('/', (req, res) => {
 });
 
 //routes
-app.use('/api/products', productsRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/upload', UploadRoutes);
+app.use('/api/products', productsRoutes);
 
 app.get(
   '/api/config/paypal',
