@@ -68,7 +68,7 @@ const Register = () => {
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type="email"
-            placeholder="Enetr email"
+            placeholder="Enter Your E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
@@ -78,7 +78,7 @@ const Register = () => {
           <Form.Label>Password </Form.Label>
           <Form.Control
             type="password"
-            placeholder="Enter Password"
+            placeholder="Enter Your Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
@@ -87,7 +87,7 @@ const Register = () => {
           <Form.Label>Confirm Password </Form.Label>
           <Form.Control
             type="password"
-            placeholder="Enter Confirm Password"
+            placeholder="Enter Your Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
