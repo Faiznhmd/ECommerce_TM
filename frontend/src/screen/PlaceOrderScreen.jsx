@@ -14,7 +14,7 @@ const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
-  console.log(cart.totalPrice);
+  // console.log(cart.totalPrice);
 
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
