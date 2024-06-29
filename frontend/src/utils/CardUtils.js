@@ -4,21 +4,31 @@ export const addDecimal = (num) => {
 
 export const updateCart = (state) => {
   //calculate items price
-  state.itemsPrice = addDecimal(
-    state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+  const itemsPrice = state.cartItems.reduce(
+    (acc, item) => acc + (item.price * 100 * item.qty) / 100,
+    0
   );
+  state.itemsPrice = addDecimal(itemsPrice);
+
   //cal shipping price
-  state.shippingPrice = addDecimal(state.itemsPrice > 100 ? 0 : 10);
+  const shippingPrice = itemsPrice > 100 ? 0 : 10;
+  state.shippingPrice = addDecimal(shippingPrice);
 
   //cal tax price
-  state.taxprice = addDecimal(Number((0.15 * state.itemsPrice).toFixed(2)));
+  const taxPrice = 0.15 * itemsPrice;
+  state.taxPrice = addDecimal(taxPrice);
 
   //cal total price
-  state.totalPrice = addDecimal(
-    Number(state.itemsPrice) +
-      Number(state.shippingPrice) +
-      Number(state.taxprice)
-  );
+  // state.totalPrice = addDecimal(
+  //   Number(state.itemsPrice) +
+  //     Number(state.shippingPrice) +
+  //     Number(state.taxprice)
+  // );
+
+  const totalPrice = itemsPrice + shippingPrice + taxPrice;
+  // Calculate the total price
+  state.totalPrice = addDecimal(totalPrice);
+
   localStorage.setItem('cart', JSON.stringify(state));
   return state;
 };

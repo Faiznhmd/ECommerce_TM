@@ -11,7 +11,7 @@ import {
 } from 'react-bootstrap';
 import { FaTrash } from 'react-icons/fa';
 import Message from '../component/Message';
-import { addToCart, removeFromCart } from '../slices/cartSlice';
+import { addToCart, removeFromCart } from '../slices/cartSlice.js';
 
 const CartScreen = () => {
   const navigate = useNavigate();
@@ -96,6 +96,7 @@ const CartScreen = () => {
               {cartItems
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)}
+              : Total Price
             </ListGroup.Item>
             <ListGroup.Item>
               <Button

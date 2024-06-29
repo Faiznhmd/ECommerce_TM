@@ -30,7 +30,6 @@ const UserEditScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log('submit');
     try {
       await updateUser({
         userId,
@@ -70,7 +69,7 @@ const UserEditScreen = () => {
             <Form.Group controlId="name" className="my-2">
               <Form.Label>Name</Form.Label>
               <Form.Control
-                type="text"
+                type="name"
                 placeholder="Enter Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -80,7 +79,7 @@ const UserEditScreen = () => {
             <Form.Group controlId="email" className="my-2">
               <Form.Label>E-mail</Form.Label>
               <Form.Control
-                type="text"
+                type="email"
                 placeholder="Enter Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -96,7 +95,7 @@ const UserEditScreen = () => {
               ></Form.Check>
             </Form.Group>
 
-            <Button type="button" variant="primary">
+            <Button type="submit" variant="primary">
               Update
             </Button>
           </Form>

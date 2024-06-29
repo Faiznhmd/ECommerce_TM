@@ -26,9 +26,10 @@ import Meta from '../component/Meta.jsx';
 const ProductScreen = () => {
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState();
+  const [comment, setComment] = useState('');
 
   const { id: productId } = useParams();
+  // console.log(productId, 'pro');
   const { userInfo } = useSelector((state) => state.auth);
 
   const { data, isLoading, error, refetch } =
@@ -38,6 +39,7 @@ const ProductScreen = () => {
     useCreateReviewMutation();
 
   const product = data?.data;
+  // console.log(product, 'product1');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -58,6 +60,8 @@ const ProductScreen = () => {
       }).unwrap();
       refetch();
       toast.success('Review created successfully');
+      setRating(0);
+      setComment('');
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
@@ -159,7 +163,7 @@ const ProductScreen = () => {
               <h2>Reviews</h2>
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant="flush">
-                {product.reviews?.map((review) => (
+                {product.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
@@ -181,7 +185,7 @@ const ProductScreen = () => {
                           as="select"
                           required
                           value={rating}
-                          onChange={(e) => setRating(e.target.value)}
+                          onChange={(e) => setRating(Number(e.target.value))}
                         >
                           <option value="">Select...</option>
                           <option value="1">1 - Poor</option>
